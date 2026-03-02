@@ -12,6 +12,12 @@ namespace Case1WFP
 {
     public partial class Form1 : Form
     {
+        private TetrisPiece currentPiece; //USIKKER HER <========
+        public Form1()
+        { 
+            InitializeComponent();
+            currentPiece = new TetrisPiece();
+        }
         private Timer timer;
         private const int GridWidth = 10;
         private const int GridHeight = 20;
@@ -30,7 +36,7 @@ namespace Case1WFP
             timer.Start();
             this.Paint = DrawGame;
 
-            private TetrisPiece CurrentPiece; //USIKKER HER <========
+       
         }
         private void UpdateGame(object sender, EventArgs e)
         { 
