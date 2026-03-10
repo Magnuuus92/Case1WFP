@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -15,7 +8,7 @@ namespace Case1WFP
     public partial class Form1 : Form
     {
         private TetrisPiece currentPiece; //USIKKER HER <========
-       
+
 
         private Timer timer;
         private const int GridWidth = 10;
@@ -38,7 +31,7 @@ namespace Case1WFP
             timer.Start();
             this.Paint += DrawGame;
 
-           
+
         }
         private void UpdateGame(object sender, EventArgs e)
         {
@@ -50,13 +43,13 @@ namespace Case1WFP
                 LockPiece();
                 currentPiece = new TetrisPiece();
             }
-            this.Invalidate(); 
+            this.Invalidate();
         }
 
         private void DrawGame(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            for (int x = 0; x < GridWidth; x++) 
+            for (int x = 0; x < GridWidth; x++)
             {
                 for (int y = 0; y < GridHeight; y++)
                 {
@@ -76,7 +69,7 @@ namespace Case1WFP
             }
             DrawPiece(g);
         }
-            private void DrawPiece(Graphics g)
+        private void DrawPiece(Graphics g)
         {
             for (int x = 0; x < currentPiece.Shape.GetLength(0); x++)
             {
@@ -89,49 +82,50 @@ namespace Case1WFP
                             (currentPiece.Y + y) * CellSize,
                             CellSize,
                             CellSize);
-            using (Brush brush = new SolidBrush(currentPiece.Color))
-            {
-                g.FillRectangle(brush, rect);
-            }
-            g.DrawRectangle(Pens.White, rect);
+                        using (Brush brush = new SolidBrush(currentPiece.Color))
+                        {
+                            g.FillRectangle(brush, rect);
+                        }
+                        g.DrawRectangle(Pens.White, rect);
                     }
                 }
-        }
-        }
-          
-
-private bool Collision()
-{
-    for (int x = 0; x< currentPiece.Shape.GetLength(0); x++)
-    {
-        for (int y = 0; y< currentPiece.Shape.GetLength(1); y++)
-        {
-            if (currentPiece.Shape[x, y] == 1)
-            { int newX = currentPiece.X + x;
-                int newY = currentPiece.Y + y;
-
-                if (newY >= GridHeight ||
-                    newX < 0 ||
-                    newX >= GridWidth ||
-                    grid[newX, newY] == 1)
-                { return true; }
             }
         }
-    }
-    return false;
-}
-private void LockPiece()
-{
-    for (int x = 0; x < currentPiece.Shape.GetLength(0); x++)
-    {
-        for (int y = 0; y < currentPiece.Shape.GetLength(1); y++)
+
+
+        private bool Collision()
         {
-            if (currentPiece.Shape[x,y] == 1)
+            for (int x = 0; x < currentPiece.Shape.GetLength(0); x++)
             {
-                grid[currentPiece.X + x, currentPiece.Y + y] = 1;
+                for (int y = 0; y < currentPiece.Shape.GetLength(1); y++)
+                {
+                    if (currentPiece.Shape[x, y] == 1)
+                    {
+                        int newX = currentPiece.X + x;
+                        int newY = currentPiece.Y + y;
+
+                        if (newY >= GridHeight ||
+                            newX < 0 ||
+                            newX >= GridWidth ||
+                            grid[newX, newY] == 1)
+                        { return true; }
+                    }
+                }
+            }
+            return false;
+        }
+        private void LockPiece()
+        {
+            for (int x = 0; x < currentPiece.Shape.GetLength(0); x++)
+            {
+                for (int y = 0; y < currentPiece.Shape.GetLength(1); y++)
+                {
+                    if (currentPiece.Shape[x, y] == 1)
+                    {
+                        grid[currentPiece.X + x, currentPiece.Y + y] = 1;
+                    }
+                }
             }
         }
-    }
-}
     }
 }
