@@ -7,7 +7,7 @@ namespace Case1WFP
 {
     public partial class Form1 : Form
     {
-        private TetrisPiece currentPiece; //USIKKER HER <========
+        private TetrisPiece currentPiece;
 
 
         private Timer timer;
@@ -16,8 +16,9 @@ namespace Case1WFP
         private const int CellSize = 30;
         private int[,] grid = new int[GridWidth, GridHeight];
 
-        public Form1()
+        public Form1() // Form1 Constructor
         {
+
             InitializeComponent();
             currentPiece = new TetrisPiece();
 
@@ -31,6 +32,7 @@ namespace Case1WFP
             timer.Start();
             this.Paint += DrawGame;
 
+            this.KeyDown += Form1_KeyDown;
 
         }
         private void UpdateGame(object sender, EventArgs e)
@@ -48,6 +50,7 @@ namespace Case1WFP
 
         private void DrawGame(object sender, PaintEventArgs e)
         {
+            //Her lages rutenettet som er bakgrunnen i tetris. Tomme ruter blir fylt med svart og fulle ruter med rød. rutenettet er hvitt.
             Graphics g = e.Graphics;
             for (int x = 0; x < GridWidth; x++)
             {
@@ -125,6 +128,33 @@ namespace Case1WFP
                         grid[currentPiece.X + x, currentPiece.Y + y] = 1;
                     }
                 }
+            }
+        }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                currentPiece.X--;
+                if (Collision())
+                    currentPiece.X++;
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                currentPiece.X++;
+                if (Collision())
+                    currentPiece.X--;
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                currentPiece.Y++;
+                if (Collision())
+                    currentPiece.Y--;
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                currentPiece.Rotate();
+                if (Collision())
+                    currentPiece.RotateBack();
             }
         }
     }
