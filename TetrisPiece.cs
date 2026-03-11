@@ -82,5 +82,19 @@ namespace Case1WFP
             }
             Shape = newShape;
         }
+        public void RotateBack()
+        {
+            int width = Shape.GetLength(0);
+            int height = Shape.GetLength(1);
+            int[,] newShape = new int[height, width];
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < width; y++)
+                {
+                    newShape[height - 1 - y, x] = Shape[x, y];
+                }
+                Shape = newShape;
+            }
+        }
     }
 }
