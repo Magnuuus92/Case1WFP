@@ -13,8 +13,8 @@ namespace Case1WFP
 
         public TetrisPiece()
         {
-
-            int type = rand.Next(7);
+            // denne skal være Next(7)
+            int type = rand.Next(8);
             switch (type)
             {
                 case 0: // I
@@ -65,6 +65,14 @@ namespace Case1WFP
                         { 0, 1, 1 }, { 1, 0, 0 }
                     };
                     Color = Color.Yellow;
+                    break;
+                // Test nr 8
+                case 8:
+                    Shape = new int[,]
+                    {
+                        {1, 1, 1 }, {1, 0, 1}, {1,1,1}
+                    };
+                    Color = Color.Blue;
                     break;
 
             }
