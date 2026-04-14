@@ -106,12 +106,14 @@ namespace Case1WFP
                     {
                         int newX = currentPiece.X + x;
                         int newY = currentPiece.Y + y;
-
-                        if (newY >= GridHeight ||
-                            newX < 0 ||
-                            newX >= GridWidth ||
-                            grid[newX, newY] == 1)
-                        { return true; }
+                        if (newX < 0 || newX >= GridWidth)
+                            return true;
+                        if (newY >= GridHeight)
+                            return true;
+                        if (newY < 0)
+                            continue;
+                        if (grid[newX, newY] == 1)
+                            return true;
                     }
                 }
             }

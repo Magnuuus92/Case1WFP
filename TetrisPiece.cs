@@ -14,7 +14,7 @@ namespace Case1WFP
         public TetrisPiece()
         {
             // denne skal være Next(7)
-            int type = rand.Next(8);
+            int type = rand.Next(7);
             switch (type)
             {
                 case 0: // I
@@ -66,15 +66,15 @@ namespace Case1WFP
                     };
                     Color = Color.Yellow;
                     break;
-                // Test nr 8
-                case 8:
-                    Shape = new int[,]
-                    {
-                        {1, 1, 1 }, {1, 0, 1}, {1,1,1}
-                    };
-                    Color = Color.Blue;
-                    break;
-
+                    /* Test nr 8
+                    case 8:
+                        Shape = new int[,]
+                       {
+                           {1, 1, 1 }, {1, 0, 1}, {1,1,1}
+                        };
+                        Color = Color.Blue;
+                        break;
+                    */
             }
             X = 4; Y = 0;
         }
@@ -97,12 +97,12 @@ namespace Case1WFP
             int[,] newShape = new int[height, width];
             for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y < width; y++)
+                for (int y = 0; y < height; y++)
                 {
                     newShape[height - 1 - y, x] = Shape[x, y];
                 }
-                Shape = newShape;
             }
+            Shape = newShape;
         }
     }
 }
